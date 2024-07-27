@@ -19,7 +19,7 @@ This tutorial is made with [tutorialkit](https://tutorialkit.dev/),
 There are sort of 3 auidences for working with signals.
 - framework authors (who would keep their existing APIs the same, and swap the internal implementation with Signals)
 - app-developers, who wouldn't change how they work, they keep using the same APIs
-- and library authors, or folks working in vanilla JavaScript for maximum reach -- **this tutorial will focus on this audience, as the other ways of using Signals wolud require choosing a library/framework**.
+- and library authors, or folks working in vanilla JavaScript for maximum reach -- **this tutorial will focus on this audience, as the other ways of using Signals would require choosing a library/framework**.
 
 ## How do you use Signals?
 
