@@ -17,8 +17,8 @@ dependencies:
 
 devDependencies:
   '@astrojs/check':
-    specifier: ^0.7.0
-    version: 0.7.0(prettier-plugin-astro@0.14.1)(typescript@5.5.4)
+    specifier: ^0.8.3
+    version: 0.8.3(prettier-plugin-astro@0.14.1)(typescript@5.5.4)
   '@astrojs/react':
     specifier: ^3.6.0
     version: 3.6.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(vite@5.3.5)
@@ -77,13 +77,13 @@ packages:
   /@antfu/utils@0.7.10:
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
 
-  /@astrojs/check@0.7.0(prettier-plugin-astro@0.14.1)(typescript@5.5.4):
-    resolution: {integrity: sha512-UTqwOeKNu9IYZmJXEeWnQuTdSd/pX58Hl4TUARsMlT97SVDL//kLBE4T/ctxRz6J573N87oE5ddtW/uOOnQTug==}
+  /@astrojs/check@0.8.3(prettier-plugin-astro@0.14.1)(typescript@5.5.4):
+    resolution: {integrity: sha512-ajcSe+ezX5jCc3dreQlWzbknzXgSGnDETNe3C1mawUOtGpO4t5z2YGaD0y+wzB84lmgPWaWZa0fKSPwLq/wUHw==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
-      '@astrojs/language-server': 2.12.1(prettier-plugin-astro@0.14.1)(typescript@5.5.4)
+      '@astrojs/language-server': 2.12.8(prettier-plugin-astro@0.14.1)(typescript@5.5.4)
       chokidar: 3.6.0
       fast-glob: 3.3.2
       kleur: 4.1.5
@@ -102,8 +102,8 @@ packages:
     resolution: {integrity: sha512-bMf9jFihO8YP940uD70SI/RDzIhUHJAolWVcO1v5PUivxGKvfLZTLTVVxEYzGYyPsA3ivdLNqMnL5VgmQySa+g==}
     dev: true
 
-  /@astrojs/language-server@2.12.1(prettier-plugin-astro@0.14.1)(typescript@5.5.4):
-    resolution: {integrity: sha512-CCibE6XwSmrZEKlPDr48LZJN7NWxOurOJK1yOzqZFMNV8Y6DIqF6s1e60gbNNHMZkthWYBNTPno4Ni/XyviinQ==}
+  /@astrojs/language-server@2.12.8(prettier-plugin-astro@0.14.1)(typescript@5.5.4):
+    resolution: {integrity: sha512-aUppjqbCdFkd2Cdr8tDtd9id7lAZAmpwpYTQrOm69z8P4NaGUE/ksMIhd0Q99zXfSBjDVC7HlxSjPg8Y7xakfg==}
     hasBin: true
     peerDependencies:
       prettier: ^3.0.0
