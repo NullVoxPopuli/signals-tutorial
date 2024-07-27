@@ -1,7 +1,7 @@
 ---
 type: lesson
 title: Intro to Signals 
-focus: /counter.js
+focus: /main.js
 ---
 
 # Intro to Signals
@@ -29,9 +29,8 @@ Starting with this code,
 ```js
 import { Signal } from 'signal-polyfill';
 
-export function counter(element) {
-    let count = new Signal.State(0);
-}
+let count = new Signal.State(0);
+let element = document.querySelector("#counter");
 ```
 we see that we have an element passed to our function, but nothing has happened with that element -- in this case the element is a button.
 
@@ -39,29 +38,26 @@ First, we'll need to add an event listener to the element.
 ```js add={6-7} 
 import { Signal } from 'signal-polyfill';
 
-export function counter(element) {
-    let count = new Signal.State(0);
+let count = new Signal.State(0);
+let element = document.querySelector("#counter");
 
-    element.addEventListener('click', () => 
-        count.set(count.get() + 1));
-}
+element.addEventListener('click', () => 
+    count.set(count.get() + 1));
 ```
 But this alone is not enough. There isn't a way yet to update the element's text. In a framework that may happen automatically via a templating system, but in Vanilla JavaScript, we have to do that ourselves, and via 
 
-```js add={3,8}
+```js add={2,10}
 import { Signal } from "signal-polyfill";
-
 import { effect } from "signal-utils/subtle/microtask-effect";
 
-export function counter(element) {
-    let count = new Signal.State(0);
+let count = new Signal.State(0);
+let element = document.querySelector("#counter");
 
-    effect(() => (element.innerHTML = `count is ${count.get()}`));
+element.addEventListener('click', () => 
+    count.set(count.get() + 1));
 
-    element.addEventListener("click", 
-        () => count.set(count.get() + 1));
-}
+effect(() => (element.innerHTML = `count is ${count.get()}`));
 ```
 
-Here we use the "micratask-effect" from [signal-utils](https://github.com/proposal-signals/signal-utils). 
+Here we use the "microtask-effect" from [signal-utils](https://github.com/proposal-signals/signal-utils). 
 Note that signal-utils is a separate project from the TC39 proposal, and effects are not included in the proposal due to how effect _timing_ can very greatly between libraries and frameworks.
