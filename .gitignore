@@ -11,3 +11,4 @@ pnpm-debug.log*
 .idea
 
 src/templates/**/pnpm-lock.yaml
+src/templates/**/package-lock.json
