@@ -1,38 +1,67 @@
 ---
 type: lesson
-title: Welcome to TutorialKit
+title: Intro to Signals 
 focus: /counter.js
 ---
 
-# Welcome to TutorialKit
+# Intro to Signals
 
-Hey there, and welcome to TutorialKit 👋!
+Signals are fine-grained reactivity, for everyone -- aiming to solve the interop problem between the various JavaScript ecosystems. 
+The [proposal to TC39](https://github.com/tc39/proposal-signals/tree/main) is currently in [Stage 1](https://tc39.es/process-document/), and is based on design input from the authors/maintainers of [Angular](https://angular.io/), [Bubble](https://bubble.io/), [Ember](https://emberjs.com/), [FAST](https://www.fast.design/), [MobX](https://mobx.js.org/), [Preact](https://preactjs.com/), [Qwik](https://qwik.dev/), [RxJS](https://rxjs.dev/), [Solid](https://www.solidjs.com/), [Starbeam](https://www.starbeamjs.com/), [Svelte](https://svelte.dev/), [Vue](https://vuejs.org/), [Wiz](https://blog.angular.io/angular-and-wiz-are-better-together-91e633d8cd5a), and more…
 
-To kick things off, we have prepared a small demo lesson for you, where we'll dive into the concept of event handling in JavaScript. Our task is to resuscitate a lifeless counter app by introducing the crucial element of interactivity: **event listeners**.
+---
 
-Let's look at the preview on the right for a moment and try to click on the button that says `counter is 0`. We'll notice that it doesn't work.
 
-In the code for `counter.js`, which you can find on the right, we have a `setupCounter` function responsible for initializing our counter app. However, a crucial component is missing: an event listener for the button.
+This tutorial is made with [tutorialkit](https://tutorialkit.dev/), 
 
-Event listeners are essential in web development as they enable our applications to respond to user actions. In this case, we need to listen for clicks on the button to increment the counter.
+## Who is this for?
 
-To address this, we'll call the `addEventListener` to attach a `click` event listener to the button element. When a click is detected, we'll execute a callback function that increments the counter and updates the `innerHTML` accordingly.
+There are sort of 3 auidences for working with signals.
+- framework authors (who would keep their existing APIs the same, and swap the internal implementation with Signals)
+- app-developers, who wouldn't change how they work, they keep using the same APIs
+- and library authors, or folks working in vanilla JavaScript for maximum reach -- **this tutorial will focus on this audience, as the other ways of using Signals wolud require choosing a library/framework**.
 
-```ts add={9}
-export function setupCounter(element) {
-  let counter = 0;
+## How do you use Signals?
 
-  const setCounter = (count) => {
-    counter = count;
-    element.innerHTML = `count is ${counter}`;
-  };
+Our goal for this lesson is to make a button that increments a count when clicked.
 
-  element.addEventListener('click', () => setCounter(counter + 1));
+Starting with this code,
+```js
+import { Signal } from 'signal-polyfill';
 
-  setCounter(0);
+export function counter(element) {
+    let count = new Signal.State(0);
+}
+```
+we see that we have an element passed to our function, but nothing has happened with that element -- in this case the element is a button.
+
+First, we'll need to add an event listener to the element.
+```js add={6-7} 
+import { Signal } from 'signal-polyfill';
+
+export function counter(element) {
+    let count = new Signal.State(0);
+
+    element.addEventListener('click', () => 
+        count.set(count.get() + 1));
+}
+```
+But this alone is not enough. There isn't a way yet to update the element's text. In a framework that may happen automatically via a templating system, but in Vanilla JavaScript, we have to do that ourselves, and via 
+
+```js add={3,8}
+import { Signal } from "signal-polyfill";
+
+import { effect } from "signal-utils/subtle/microtask-effect";
+
+export function counter(element) {
+    let count = new Signal.State(0);
+
+    effect(() => (element.innerHTML = `count is ${count.get()}`));
+
+    element.addEventListener("click", 
+        () => count.set(count.get() + 1));
 }
 ```
 
-This gives you a sneak peak of the TutorialKit experience, demonstrating what it's capable of.
-
-Happy writing!
+Here we use the "micratask-effect" from [signal-utils](https://github.com/proposal-signals/signal-utils). 
+Note that signal-utils is a separate project from the TC39 proposal, and effects are not included in the proposal due to how effect _timing_ can very greatly between libraries and frameworks.

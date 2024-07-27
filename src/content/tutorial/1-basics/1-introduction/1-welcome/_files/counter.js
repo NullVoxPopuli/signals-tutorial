@@ -1,10 +1,5 @@
-export function setupCounter(element) {
-  let counter = 0;
+import { Signal } from "signal-polyfill";
 
-  const setCounter = (count) => {
-    counter = count;
-    element.innerHTML = `count is ${counter}`;
-  };
-
-  setCounter(0);
+export function counter(element) {
+  let count = new Signal.State(0);
 }

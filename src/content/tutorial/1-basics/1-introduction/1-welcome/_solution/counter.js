@@ -1,12 +1,11 @@
-export function setupCounter(element) {
-  let counter = 0;
+import { Signal } from "signal-polyfill";
 
-  const setCounter = (count) => {
-    counter = count;
-    element.innerHTML = `count is ${counter}`;
-  };
+import { effect } from "signal-utils/subtle/microtask-effect";
 
-  element.addEventListener('click', () => setCounter(counter + 1));
+export function counter(element) {
+  let count = new Signal.State(0);
 
-  setCounter(0);
+  effect(() => (element.innerHTML = `count is ${count.get()}`));
+
+  element.addEventListener("click", () => count.set(count.get() + 1));
 }

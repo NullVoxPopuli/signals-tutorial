@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "signal-polyfill": "^0.1.2",
+    "signal-utils": "^0.18.0"
   }
 }
