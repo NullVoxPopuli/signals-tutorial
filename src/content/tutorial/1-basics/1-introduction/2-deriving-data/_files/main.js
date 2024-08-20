@@ -6,4 +6,4 @@ let element = document.querySelector("#counter");
 
 element.addEventListener("click", () => count.set(count.get() + 1));
 
-effect(() => (element.innerHTML = `count is ${count.get()}`));
+effect(() => (element.innerText = `count is ${count.get()}`));
