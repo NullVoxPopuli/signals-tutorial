@@ -6,16 +6,22 @@ let state = window.state = {
 };
 let element = document.querySelector("#app");
 
-function createUI(state) {
+function App(state) {
   return `
     <div class="card">
-      <button id="counter" type="button" onclick="state.count.set(state.count.get() + 1)">
-        count is ${state.count.get()}
-      </button>
+      ${Counter(state)}
     </div>
   `;
 };
 
+function Counter(state) {
+  return `
+    <button id="counter" type="button" onclick="state.count.set(state.count.get() + 1)">
+      count is ${state.count.get()}
+    </button>
+  `;
+}
+
 effect(() => {
-  element.innerHTML = createUI(state);
+  element.innerHTML = App(state);
 });
